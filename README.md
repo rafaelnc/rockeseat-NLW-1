@@ -54,7 +54,7 @@ $ yarn start
 
 ```
 
-Web:
+Mobile:
 ```bash
 
 # Go into the repository
