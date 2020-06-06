@@ -16,7 +16,7 @@ interface IBGECityResponse {
 
 
 const Home = () => {
-   
+
     const [selectedUf, setSelectedUf] = useState('0');
     const [selectedCity, setSelectedCity] = useState('0');
     const [ufs, setUfs] = useState<string[]>([]);
@@ -51,7 +51,7 @@ const Home = () => {
     function handleSelectedUf(uf: string) {
 
         setSelectedUf(uf);
-    
+
     }
 
 
@@ -80,26 +80,36 @@ const Home = () => {
 
                 <View style={styles.footer}>
 
-                    <RNPickerSelect
-
-                        onValueChange={(value) => handleSelectedUf(value)}
-                        placeholder={{ label: 'Selecione o estado', value: 'null' }}
-                        items={
-                            ufs.map(uf => (
-                                { label: uf, value: uf }
-                            ))
-                        }
-                    />
-
-                    <RNPickerSelect
-                        onValueChange={(value) => handleSelectedCity(value)}
-                        placeholder={{ label: 'Selecione a cidade', value: 'null' }}
-                        items={
-                            cities.map(city => (
-                                { label: city, value: city }
-                            ))}
-                    />
-
+                    <View style={styles.select}>
+                        <RNPickerSelect
+                            style={pickerSelectStyles}
+                            onValueChange={(value) => handleSelectedUf(value)}
+                            placeholder={{
+                                 label: 'Selecione o estado', 
+                                 value: 'null',
+                                 color: '#9EA0A4' 
+                                }}
+                            items={
+                                ufs.map(uf => (
+                                    { label: uf, value: uf }
+                                ))
+                            }
+                        />
+                    </View>
+                    <View style={styles.select}>
+                        <RNPickerSelect
+                            style={pickerSelectStyles}
+                            onValueChange={(value) => handleSelectedCity(value)}
+                            placeholder={{
+                                 label: 'Selecione a cidade',
+                                 value: 'null', 
+                                 color: '#9EA0A4' }}
+                            items={
+                                cities.map(city => (
+                                    { label: city, value: city }
+                                ))}
+                        />
+                    </View>
                     <RectButton style={styles.button} onPress={handleNavigateToPoints}>
                         <View style={styles.buttonIcon}>
                             <Text>
@@ -116,6 +126,23 @@ const Home = () => {
         </KeyboardAvoidingView>
     );
 };
+
+const pickerSelectStyles = StyleSheet.create({
+    inputIOS: {
+      height: 60,
+      paddingHorizontal: 24,
+      fontSize: 16,
+    },
+    inputAndroid: {
+      height: 60,
+      paddingHorizontal: 24,
+      fontSize: 16,
+    },
+    iconContainer: {
+      top: 18,
+      right: 12,
+    },
+  });
 
 const styles = StyleSheet.create({
     container: {
@@ -148,7 +175,14 @@ const styles = StyleSheet.create({
 
     footer: {},
 
-    select: {},
+   
+  select: {
+    height: 60,
+    backgroundColor: '#FFF',
+    borderRadius: 10,
+    marginBottom: 8,
+  },
+
 
     input: {
         height: 60,
